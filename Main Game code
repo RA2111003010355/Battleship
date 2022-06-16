@@ -50,36 +50,39 @@ void Input();void Initialise();
         while (gotShip==true)
         {
             int shipPlace= rand()%3;
+            int modx,mody, isOccupied=0;
             switch(shipPlace){
                 case 0: if(y-len>0)
-                        ship[i][0]= x*10+y;
-                        ship[i][1]= x*10+y-len;
-                        for(int a=y;a>=y-len;a--){
-                            aiB[x][a]=1;
-                        }
+                        modx= 0;mody=-1;
+                    
                         break;
                 case 1: if(x-len>0)
-                        ship[i][0]= x*10+y;
-                        ship[i][1]= (x-len)*10+y;
-                         for(int a=x;a>x-len;a--){
-                            aiB[a][y]=1;
-                        }
+                          modx= -1;mody=0;
                         break;
                 case 2: if(y+len>0)
-                        ship[i][0]= x*10+y;
-                        ship[i][1]= x*10+y+len;
-                         for(int a=y;a<y+len;a++){
-                            aiB[x][a]=1;
-                        }
+                          modx= 0;mody=1;
                         break;
                 case 3: if(y+len>0)
-                        ship[i][0]= x*10+y;
-                        ship[i][1]= x*10+y+len;
-                         for(int a=x;a<x+len;a++){
-                            aiB[a][y]=1;
-                        }
+                          modx= 1;mody=0;
                         break;
                 
+                
+            }
+            int tempx=x,tempy=y;
+            for (int j=0;j<len;j++){
+                if(aiB[tempx][tempy]!=0)
+                    isOccupied=1;
+                tempx= tempx+modx;
+                tempy= tempy+mody;
+            }
+            if(isOccupied==0){
+                for(int j=0;j<len;j++)
+                {
+                    ship[i][j]=x*10+y;
+                    aiB[x][y]=1;
+                    x= x+modx;
+                    y=y+mody;
+                }
             }
         }
         
