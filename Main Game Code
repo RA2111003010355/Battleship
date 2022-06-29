@@ -12,6 +12,7 @@ int selfSink=3;
 bool hunt=false;
 void Hunt(int , int);
 void EndGame();
+int playCoordx,playCoordy;
 
 void Input();void Initialise();
  int main()
@@ -96,7 +97,7 @@ void Input();void Initialise();
     srand(time(0));
     sleep(2);
     printf("My Turn.\n");
-    int playCoordx,playCoordy;
+    
     for(;;){
          playCoordx=rand()%4;
          playCoordy=rand()%4;
@@ -113,7 +114,7 @@ void Input();void Initialise();
         
         case 1: uiB[playCoordx][playCoordy]=2;
                 hunt=true;
-                Input(playCoordx,playCoordy);
+                Input();
                 break;
         default: uiB[playCoordx][playCoordy]=1;
                 break;
@@ -170,6 +171,8 @@ void Input(){
     }
     if(hunt==false)
     Play();
+    else 
+    Hunt(playCoordx,playCoordy);
 }
 void Hunt(int coordx, int coordy){
     int a[]={0,1,0,-1}, b[]={1,0,-1,0};
